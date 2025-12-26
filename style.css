@@ -1,144 +1,108 @@
+/* ========== RESET ========== */
 * {
   box-sizing: border-box;
-  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
+/* ========== PAGE ========== */
 body {
-  background: linear-gradient(135deg, #141e30, #243b55);
-  height: 100vh;
+  min-height: 100vh;
+  background: #f4f6f8;
+  font-family: Arial, Helvetica, sans-serif;
   display: flex;
   justify-content: center;
   align-items: center;
-  color: white;
 }
 
+/* ========== APP CONTAINER ========== */
 .app {
-  width: 420px;
-  background: #0b0b0b;
-  border-radius: 14px;
-  overflow: hidden;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
-}
-
-.header {
+  width: 100%;
+  max-width: 420px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  padding: 16px;
   text-align: center;
-  padding: 12px;
-  background: #000;
 }
 
-.stage {
-  position: relative;
-  height: 360px;
-  background: radial-gradient(circle, #1c1c1c, #000);
+/* ========== TITLE ========== */
+.app h2 {
+  font-size: 20px;
+  margin-bottom: 4px;
 }
 
+.app p {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+/* ========== AVATAR VIDEO ========== */
 #avatar {
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 120px;
-  height: 220px;
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  border-radius: 12px;
+  background: black;
+  margin: 10px auto;
+  display: block;
 }
 
-/* Avatar parts */
-.head {
-  width: 60px;
-  height: 60px;
-  background: #f1c27d;
-  border-radius: 50%;
-  margin: auto;
-  animation: headMove 4s infinite;
-}
-
-.body {
-  width: 80px;
-  height: 90px;
-  background: #222;
-  margin: 5px auto;
-  border-radius: 10px;
-}
-
-.hand {
-  width: 20px;
-  height: 70px;
-  background: #f1c27d;
-  position: absolute;
-  top: 90px;
-  border-radius: 10px;
-}
-
-.hand.left {
-  left: -10px;
-  animation: idleHand 3s infinite;
-}
-
-.hand.right {
-  right: -10px;
-  animation: idleHand 3s infinite reverse;
-}
-
-/* Text box */
-#text-box {
-  position: absolute;
-  bottom: 220px;
-  left: 50%;
-  transform: translateX(-50%);
-  background: rgba(0,0,0,0.7);
-  padding: 10px 14px;
+/* ========== ANSWER BOX ========== */
+#answerBox {
+  margin: 12px auto;
+  padding: 10px;
+  width: 100%;
+  min-height: 44px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  width: 85%;
-  text-align: center;
-  animation: fadeIn 0.6s;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
 }
 
-/* Input */
+/* ========== INPUT AREA ========== */
 .input-area {
   display: flex;
-  background: #000;
+  gap: 8px;
+  margin-top: 10px;
 }
 
-input {
+/* TEXT INPUT */
+#question {
   flex: 1;
-  padding: 12px;
-  background: #111;
-  color: white;
-  border: none;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  outline: none;
 }
 
-button {
-  padding: 12px 16px;
-  background: #00ff99;
+#question:focus {
+  border-color: #007bff;
+}
+
+/* BUTTON */
+.input-area button {
+  padding: 10px 14px;
+  font-size: 14px;
+  background: #007bff;
+  color: #fff;
   border: none;
+  border-radius: 6px;
   cursor: pointer;
-  font-weight: bold;
 }
 
-/* Animations */
-@keyframes idleHand {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(8deg); }
-  100% { transform: rotate(0deg); }
+.input-area button:hover {
+  background: #0056b3;
 }
 
-@keyframes headMove {
-  0% { transform: translateX(0); }
-  50% { transform: translateX(4px); }
-  100% { transform: translateX(0); }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: translate(-50%, 10px); }
-  to { opacity: 1; transform: translate(-50%, 0); }
-}
-
-/* Gesture when answering */
-.present .hand {
-  animation: presentHand 1s ease-in-out infinite;
-}
-
-@keyframes presentHand {
-  0% { transform: rotate(0deg); }
-  50% { transform: rotate(25deg); }
-  100% { transform: rotate(0deg); }
+/* ========== MOBILE SAFETY ========== */
+@media (max-width: 480px) {
+  .app {
+    border-radius: 0;
+    min-height: 100vh;
+  }
 }
