@@ -1,5 +1,5 @@
 
-const GOOGLE_API_KEY = "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";
+const GOOGLE_API_KEY = "AIzaSyAckcdmt5Ia_taaG-g2NE3TgZQZzYXFxNg";
 
 const avatar = document.getElementById("avatar");
 const answerBox = document.getElementById("answerBox");
