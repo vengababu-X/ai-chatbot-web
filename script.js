@@ -1,36 +1,56 @@
+
+const GOOGLE_API_KEY = "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";
+
 const avatar = document.getElementById("avatar");
-const textBox = document.getElementById("text-box");
+const answerBox = document.getElementById("answerBox");
 
-const demoAnswers = [
-  "I am XKING AI, always active.",
-  "I move even when you are silent.",
-  "This answer is shown while I gesture.",
-  "You are watching a living interface.",
-  "Text and motion together feel natural."
-];
+const videos = {
+  idle: "assets/idle.mp4",
+  thinking: "assets/thinking.mp4",
+  answering: "assets/answering.mp4"
+};
 
-function ask() {
-  const input = document.getElementById("userInput");
-  if (!input.value) return;
+function setState(state) {
+  avatar.src = videos[state];
+  avatar.play();
+}
 
-  avatar.classList.add("present");
+async function ask() {
+  const input = document.getElementById("question");
+  const question = input.value.trim();
+  if (!question) return;
 
-  // Fake thinking delay
-  setTimeout(() => {
-    const reply = demoAnswers[Math.floor(Math.random() * demoAnswers.length)];
-    textBox.textContent = reply;
+  setState("thinking");
+  answerBox.textContent = "Thinking...";
 
-    // Stop presenting after a bit
-    setTimeout(() => {
-      avatar.classList.remove("present");
-    }, 3000);
-  }, 600);
+  try {
+    const response = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${GOOGLE_API_KEY}`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [
+            { parts: [{ text: question }] }
+          ]
+        })
+      }
+    );
+
+    const data = await response.json();
+    const reply =
+      data?.candidates?.[0]?.content?.parts?.[0]?.text ||
+      "No response received.";
+
+    setState("answering");
+    answerBox.textContent = reply;
+
+    setTimeout(() => setState("idle"), 4000);
+
+  } catch (err) {
+    setState("idle");
+    answerBox.textContent = "Error getting response.";
+  }
 
   input.value = "";
 }
-
-/* Idle random movement even without interaction */
-setInterval(() => {
-  avatar.classList.toggle("present");
-  setTimeout(() => avatar.classList.remove("present"), 1500);
-}, 9000);
