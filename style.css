@@ -1,46 +1,144 @@
+* {
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    background: #f0f0f0;
+  background: linear-gradient(135deg, #141e30, #243b55);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
 }
 
-.chat-container {
-    width: 400px;
-    margin: 60px auto;
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
+.app {
+  width: 420px;
+  background: #0b0b0b;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
 }
 
-#chat-box {
-    height: 300px;
-    overflow-y: auto;
-    border: 1px solid #ccc;
-    padding: 10px;
-    margin-bottom: 10px;
+.header {
+  text-align: center;
+  padding: 12px;
+  background: #000;
 }
 
-.message {
-    margin: 6px 0;
+.stage {
+  position: relative;
+  height: 360px;
+  background: radial-gradient(circle, #1c1c1c, #000);
 }
 
-.user {
-    font-weight: bold;
+#avatar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 220px;
 }
 
-.bot {
-    color: #333;
+/* Avatar parts */
+.head {
+  width: 60px;
+  height: 60px;
+  background: #f1c27d;
+  border-radius: 50%;
+  margin: auto;
+  animation: headMove 4s infinite;
 }
 
+.body {
+  width: 80px;
+  height: 90px;
+  background: #222;
+  margin: 5px auto;
+  border-radius: 10px;
+}
+
+.hand {
+  width: 20px;
+  height: 70px;
+  background: #f1c27d;
+  position: absolute;
+  top: 90px;
+  border-radius: 10px;
+}
+
+.hand.left {
+  left: -10px;
+  animation: idleHand 3s infinite;
+}
+
+.hand.right {
+  right: -10px;
+  animation: idleHand 3s infinite reverse;
+}
+
+/* Text box */
+#text-box {
+  position: absolute;
+  bottom: 220px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0,0,0,0.7);
+  padding: 10px 14px;
+  border-radius: 8px;
+  width: 85%;
+  text-align: center;
+  animation: fadeIn 0.6s;
+}
+
+/* Input */
 .input-area {
-    display: flex;
+  display: flex;
+  background: #000;
 }
 
 input {
-    flex: 1;
-    padding: 8px;
+  flex: 1;
+  padding: 12px;
+  background: #111;
+  color: white;
+  border: none;
 }
 
 button {
-    padding: 8px 12px;
-    cursor: pointer;
+  padding: 12px 16px;
+  background: #00ff99;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Animations */
+@keyframes idleHand {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(8deg); }
+  100% { transform: rotate(0deg); }
+}
+
+@keyframes headMove {
+  0% { transform: translateX(0); }
+  50% { transform: translateX(4px); }
+  100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, 10px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+
+/* Gesture when answering */
+.present .hand {
+  animation: presentHand 1s ease-in-out infinite;
+}
+
+@keyframes presentHand {
+  0% { transform: rotate(0deg); }
+  50% { transform: rotate(25deg); }
+  100% { transform: rotate(0deg); }
 }
