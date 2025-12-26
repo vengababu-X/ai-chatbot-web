@@ -1,4 +1,4 @@
-const API_KEY = "PASTE_YOUR_OPENAI_API_KEY_HERE";
+const API_KEY = "AIzaSyAckcdmt5Ia_taaG-g2NE3TgZQZzYXFxNg";
 
 async function sendMessage() {
     const input = document.getElementById("user-input");
