@@ -2,34 +2,23 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>XKING Animated AI</title>
+  <title>XKING AI</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="app">
-  <div class="header">
-    <h2>XKING AI</h2>
-    <p>Owned & Built by <b>THE GREAT XKING</b></p>
-  </div>
+<h2>XKING AI</h2>
+<p>Built by THE GREAT XKING</p>
 
-  <div class="stage">
-    <!-- AVATAR -->
-    <div id="avatar">
-      <div class="head"></div>
-      <div class="body"></div>
-      <div class="hand left"></div>
-      <div class="hand right"></div>
-    </div>
+<video id="avatar" autoplay loop muted playsinline>
+  <source src="assets/idle.mp4" type="video/mp4">
+</video>
 
-    <!-- TEXT OUTPUT -->
-    <div id="text-box">I am alive. Ask me anything.</div>
-  </div>
+<div id="answerBox">Ask me something.</div>
 
-  <div class="input-area">
-    <input id="userInput" placeholder="Type your question..." />
-    <button onclick="ask()">Ask</button>
-  </div>
+<div class="input-area">
+  <input id="question" placeholder="Type your question..." />
+  <button onclick="ask()">Ask</button>
 </div>
 
 <script src="script.js"></script>
