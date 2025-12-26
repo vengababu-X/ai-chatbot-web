@@ -1,43 +1,36 @@
-const API_KEY = "AIzaSyAckcdmt5Ia_taaG-g2NE3TgZQZzYXFxNg";
+const avatar = document.getElementById("avatar");
+const textBox = document.getElementById("text-box");
 
-async function sendMessage() {
-    const input = document.getElementById("user-input");
-    const message = input.value.trim();
-    if (!message) return;
+const demoAnswers = [
+  "I am XKING AI, always active.",
+  "I move even when you are silent.",
+  "This answer is shown while I gesture.",
+  "You are watching a living interface.",
+  "Text and motion together feel natural."
+];
 
-    addMessage("You", message);
-    input.value = "";
+function ask() {
+  const input = document.getElementById("userInput");
+  if (!input.value) return;
 
-    const response = await fetch("https://api.openai.com/v1/chat/completions", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Authorization": `Bearer ${API_KEY}`
-        },
-        body: JSON.stringify({
-            model: "gpt-4o-mini",
-            messages: [
-                { role: "system", content: "You are a helpful AI chatbot." },
-                { role: "user", content: message }
-            ]
-        })
-    });
+  avatar.classList.add("present");
 
-    const data = await response.json();
+  // Fake thinking delay
+  setTimeout(() => {
+    const reply = demoAnswers[Math.floor(Math.random() * demoAnswers.length)];
+    textBox.textContent = reply;
 
-    if (data.error) {
-        addMessage("Bot", "Error: " + data.error.message);
-        return;
-    }
+    // Stop presenting after a bit
+    setTimeout(() => {
+      avatar.classList.remove("present");
+    }, 3000);
+  }, 600);
 
-    addMessage("Bot", data.choices[0].message.content);
+  input.value = "";
 }
 
-function addMessage(sender, text) {
-    const chatBox = document.getElementById("chat-box");
-    const div = document.createElement("div");
-    div.className = "message";
-    div.innerHTML = `<span class="${sender.toLowerCase()}">${sender}:</span> ${text}`;
-    chatBox.appendChild(div);
-    chatBox.scrollTop = chatBox.scrollHeight;
-}
+/* Idle random movement even without interaction */
+setInterval(() => {
+  avatar.classList.toggle("present");
+  setTimeout(() => avatar.classList.remove("present"), 1500);
+}, 9000);
